@@ -1,28 +1,42 @@
 (function() {
   'use strict';
 
-    // Constructor functioni to create an animal
-    function Animal(name, dob) {
+    window.zoo = window.zoo || {};
+
+    window.zoo.Animal = Animal;
+    window.zoo.PolarBear = PolarBear;
+    window.zoo.BlueJay =BlueJay;
+
+    /**
+     * Constructor function to create a new animal
+     * @param {String} name [description]
+     * @param {Number} age  [description]
+     * @throws {SyntaxError} If name is not a string, and age is not a number
+     */
+    function Animal(name, age) {
+      if(typeof(name) !== 'string') {
+        throw new SyntaxError('Hey, this is not a string!');
+      }
+      if(typeof(age) !== 'number'){
+        console.log('hey');
+        throw new SyntaxError('Hey,this is not a number!');
+      }
       console.log('inside animal', this);
       this.name = name || 'Miscellaneous';
-      this.dob = dob || 'September 10, 2010';
+      this.dob = age || 20;
     }
 
     // Constructor function to create a new Polar Bear
-    function PolarBear(name, dob, color, mammal){
-      Animal.apply(this, [name, dob]);
-      this.dob = dob || 10;
-      this.color = color || 'brown';
-      if(typeof(mammal) === 'boolean') {
-        this.mammal = mammal;
-      } else {
-        this.mammal = false;
-      }
+    function PolarBear(name, age){
+      Animal.apply(this, [name, age]);
+      this.dob = age || 11;
       // console.log(this, arguments);
     }
 
     PolarBear.prototype = Object.create(Animal.prototype);
     PolarBear.prototype.constructor = PolarBear;
+    PolarBear.prototype.mammal = true;
+    PolarBear.prototype.color = 'white';
 
     var motherPolarBear = new PolarBear('Rudy', 30, 'white', true);
 
@@ -37,10 +51,18 @@
       return ('8 minutes');
     };
 
-    // Constructor function to create a new Turtle
-    function BlueJay(name, dob, color, mammal, reptile){
-      Animal.apply(this, [name, dob]);
-      this.dob = dob || 10;
+    // Constructor function to create a new BlueJay
+    /**
+     * [BlueJay description]
+     * @param {[type]} name    [description]
+     * @param {[type]} age     [description]
+     * @param {[type]} color   [description]
+     * @param {[type]} mammal  [description]
+     * @param {[type]} reptile [description]
+     */
+    function BlueJay(name, age, color, mammal, bird){
+      Animal.apply(this, [name, age]);
+      this.dob = age || 10;
       this.color = color || 'grey';
       if(typeof(mammal) === 'boolean') {
         this.mammal = mammal;
