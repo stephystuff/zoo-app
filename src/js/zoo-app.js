@@ -9,24 +9,29 @@
 
     /**
      * Constructor function to create a new animal
-     * @param {String} name [description]
-     * @param {Number} age  [description]
-     * @throws {SyntaxError} If name is not a string, and age is not a number
+     * @param {String} name Name of animal as a string
+     * @param {Number} age  The number of years in age
+     * @throws {TypeError} If name is not a string, and age is not a number
      */
     function Animal(name, age) {
       if(typeof(name) !== 'string') {
-        throw new SyntaxError('Hey, this is not a string!');
+        throw new TypeError('Hey, this is not a string!');
       }
       if(typeof(age) !== 'number'){
         console.log('hey');
-        throw new SyntaxError('Hey,this is not a number!');
+        throw new TypeError('Hey,this is not a number!');
       }
       console.log('inside animal', this);
       this.name = name || 'Miscellaneous';
       this.dob = age || 20;
     }
 
-    // Constructor function to create a new Polar Bear
+    /**
+     * Constructor function to create a new Polar Bear
+     * @param {String} name Name of polar bear as a string
+     * @param {Number} age  The number of years in age
+     * @throws {TypeError} if mammal is not true or if color is not white
+     */
     function PolarBear(name, age){
       Animal.apply(this, [name, age]);
       this.dob = age || 11;
@@ -53,32 +58,21 @@
 
     // Constructor function to create a new BlueJay
     /**
-     * [BlueJay description]
-     * @param {[type]} name    [description]
-     * @param {[type]} age     [description]
-     * @param {[type]} color   [description]
-     * @param {[type]} mammal  [description]
-     * @param {[type]} reptile [description]
+     * Constructor function to creat a new BlueJay
+     * @param {String} name    Nambe given a string
+     * @param {Number} age     Number of years in age
      */
-    function BlueJay(name, age, color, mammal, bird){
+    function BlueJay(name, age){
       Animal.apply(this, [name, age]);
       this.dob = age || 10;
-      this.color = color || 'grey';
-      if(typeof(mammal) === 'boolean') {
-        this.mammal = mammal;
-      } else {
-        this.mammal = false;
-      }
-      if(typeof(reptile) === 'boolean') {
-        this.reptile = reptile;
-      } else {
-        this.reptile = false;
-      }
+
       // console.log(this, arguments);
     }
 
     BlueJay.prototype = Object.create(Animal.prototype);
     BlueJay.prototype.constructor = BlueJay;
+    BlueJay.prototype.color = 'blue';
+    // BlueJay.prototype.sound = 'chirp';
 
     var motherBlueJay = new BlueJay('Janet', 10, 'blue', false, true);
 
@@ -89,12 +83,12 @@
     console.log(motherBlueJay.layEgg(1));
 
     // Species-specific method for duratioin of flying
-    BlueJay.prototype.fly = function fly(duration) {
-      return ('20 minutes');
+    BlueJay.prototype.chirp = function chirp() {
+      return ('CHIRP');
     };
 
-    var sandy = new PolarBear('Sandy', 26, 'white', true, false);
-    var jacob = new BlueJay('Jacob', 5, 'blue', false, true);
+    var sandy = new PolarBear('Sandy', 26);
+    var jacob = new BlueJay('Jacob', 5);
 
     // console.log('sandy:', sandy);
 
